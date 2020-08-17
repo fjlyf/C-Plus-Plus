@@ -1,7 +1,251 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
+#include<assert.h>
 using namespace std;
 
+//赋值运算符重载
+class Date
+{
+public:
+	Date(int year = 1900, int month = 1, int day = 1)
+	{
+		_year = year;
+		_month = month;
+		_day = day;
+	}
+	Date(const Date& d)
+	{
+		_year = d._year;
+		_month = d._month;
+		_day = d._day;
+	}
+	Date& operator=(const Date& d)
+	{
+		if (this != &d)
+		{
+			_year = d._year;
+			_month = d._month;
+			_day = d._day;
+		}
+		return *this;
+	}
+private:
+	int _year;
+	int _month;
+	int _day;
+};
+int main()
+{
+	Date a;
+	Date d(a);
+	a = d;
+	return 0;
+}
+
+/*
+class A
+{ 
+public:    
+	A(int a) 
+		:_a1(a)
+		, _a2(_a1)    
+	{}        
+	void Print() 
+	{ 
+		cout << _a1 << " " << _a2 << endl; 
+	} 
+private:   
+	int _a2;    
+	int _a1;
+};
+
+int main() 
+{ 
+	A aa(1);    //先初始化a2，初始化列表中初始化a2的方法为a2(a1),此时a1为随机值；在初始化a1,初始化列表中初始化a1的方法为a1(a),此时a的值为1。
+	aa.Print(); //输出 1 随机值
+}
+
+/*
+//拷贝构造函数
+//拷贝构造函数是构造函数的一个重载形式
+//拷贝构造函数的参数只有一个且必须使用引用传参，使用传值方式会引发无穷递归调用
+
+class String
+{
+public:
+	String(const char* str = "jack")
+	{
+		_str = (char*)malloc(strlen(str) + 1);
+		strcpy(_str, str);
+	}
+	~String()
+	{
+		cout << "~String()" << endl;
+		free(_str);
+	}
+private:
+	char* _str;
+};
+int main()
+{
+	String s1("hello");
+	String s2(s1);
+	return 0;
+}
+
+/*
+class Date
+{
+public:
+	Date(int year = 1900, int month = 1, int day = 1)
+	{
+		cout << "Date()" << endl;
+		_year = year;
+		_month = month;
+		_day = day;
+	}
+	Date(const Date& d)//const修饰,引用传参
+	{
+		cout << "Date(const Date&)" << endl;
+		_year = d._year;
+		_month = d._month;
+		_day = d._day;
+	}
+	~Date()
+	{
+		cout << "~Date()" << endl;
+	}
+private:
+	int _year;
+	int _month;
+	int _day;
+};
+int main()
+{
+	Date d1;
+	Date d2(d1);
+	return 0;
+}
+
+/*
+//析构函数
+typedef int DateType;
+class Seqlist
+{
+public:
+	Seqlist(int capacity = 10)
+	{
+		_pDate = (DateType*)malloc(capacity * sizeof(DateType));
+		assert(_pDate);
+		_size = 0;
+		_capacity = capacity;
+	}
+	~Seqlist()
+	{
+		cout << "~Seqlist()" << endl;
+		if (_pDate)
+		{
+			free(_pDate);
+			_pDate = NULL;
+			_capacity = 0;
+			_size = 0;
+		}
+	}
+private:
+	int* _pDate;
+	size_t _size;
+	size_t _capacity;
+};
+void main()
+{
+	Seqlist q1;
+}
+
+/*
+//构造函数函数
+//只有单个形参，该形参是对本类类型对象的引用(一般常用const修饰)，在用已存在的类类型对象 创建新对象时由编译器自动调用
+class Date {
+public:   
+	Date()    
+	{
+		_year = 1900;      
+		_month = 1;        
+		_day = 1;
+	}        
+	Date(int year = 1900, int month = 1, int day = 1)    
+	{
+		_year = year; 
+		_month = month;      
+		_day = day;
+	}
+
+private:    
+	int _year;  
+	int _month;   
+	int _day;
+};
+
+//无参的构造函数和全缺省的构造函数都称为默认构造函数，并且默认构造函数只能有一个。注意：无参 构造函数、全缺省构造函数、我们没写编译器默认生成的构造函数，都可以认为是默认成员函数。
+int main()
+{
+	Date d1;//错误	2	error C2668: “Date::Date”: 对重载函数的调用不明确	
+}
+
+/*
+class Date
+{
+public:
+	Date()
+	{}
+	Date(int year, int month, int day)
+	{
+		_year = year;
+		_month = month;
+		_day = day;
+	}
+private:
+	int _year;
+	int _month;
+	int _day;
+};
+void main()
+{
+	Date d1;
+	//Date d2(2015, 1, 1);
+	Date d3;
+}
+/*
+class Date
+{
+public:
+	void SetDate(int year, int month, int day)
+	{
+		_year = year;
+		_month = month;
+		_day = day;
+	}
+	void Display()
+	{
+		cout << _year << "-" << _month << "-" << _day << endl;
+	}
+private:
+	int _year;
+	int _month;
+	int _day;
+};
+
+int main()
+{
+	Date d1, d2;
+	d1.SetDate(2020, 8, 1);
+	d1.Display();
+	//析构函数是一个特殊的成员函数，名字与类名相同，创建类类型对象时由编译器自动调用，保证每个数据成员都有一个合适的初始值，并且在对象的生命周期内只调用一次。
+	//Date d2;
+	d2.SetDate(2020, 8, 15);
+	d2.Display();
+	return 0;
+}
+/*
 //this指针
 class A
 {
