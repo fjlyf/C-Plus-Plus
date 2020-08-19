@@ -3,7 +3,225 @@
 #include<assert.h>
 using namespace std;
 
+
 //赋值运算符重载
+class Int;
+ostream& operator<<(ostream &out,const Int &i);
+istream& operator>>(istream &in, Int &i);
+
+class Int
+{
+	friend ostream& operator<<(ostream &out, const Int &i);
+	friend istream& operator>>(istream &in, Int &i);
+public:
+	Int(int i = 0) :m_i(i)
+	{}
+	~Int()
+	{}
+public:
+	Int operator++(int) //后++
+	{
+		Int tmp = *this;
+		//m_i++;
+		++*this;
+		return tmp;
+	}
+	Int& operator++()   //前++
+	{
+		m_i++;
+		return *this;
+	}
+	Int operator--(int)
+	{
+		Int tmp = *this;
+		//m_i--;
+		--*this;
+		return tmp;
+	}
+	Int& operator--()   
+	{
+		m_i--;
+		return *this;
+	}
+public:
+	Int operator+(const Int &i)
+	{
+		return Int(m_i + i.m_i);
+	}
+	Int operator-(const Int &i)
+	{
+		return Int(m_i - i.m_i);
+	}
+	Int operator*(const Int &i)
+	{
+		return Int(m_i * i.m_i);
+	}
+	Int operator/(const Int &i)
+	{
+		return Int(m_i / i.m_i);
+	}
+	Int operator%(const Int &i)
+	{
+		return Int(m_i % i.m_i);
+	}
+public:
+	Int& operator+=(const Int &i)
+	{
+		m_i += i.m_i;
+		return *this;
+	}
+	Int& operator-=(const Int &i)
+	{
+		m_i -= i.m_i;
+		return *this;
+	}
+	Int& operator*=(const Int &i)
+	{
+		m_i *= i.m_i;
+		return *this;
+	}
+	Int& operator/=(const Int &i)
+	{
+		m_i /= i.m_i;
+		return *this;
+	}
+	Int& operator%=(const Int &i)
+	{
+		m_i %= i.m_i;
+		return *this;
+	}
+public:
+	Int operator>>(int offset)
+	{
+		return Int(m_i >> offset);
+	}
+	Int operator<<(int offset)
+	{
+		return Int(m_i << offset);
+	}
+	Int& operator>>=(int offset)
+	{
+		m_i >>= offset;
+		return *this;
+	}
+	Int& operator<<=(int offset)
+	{
+		m_i <<= offset;
+		return *this;
+	}
+public:
+	bool operator==(const Int &i)
+	{return m_i == i.m_i;}
+	bool operator!=(const Int &i)
+	{return !(*this==i);}
+private:
+	int m_i;
+};
+
+ostream& operator<<(ostream &out, const Int &i)
+{
+	out << i.m_i;
+	return out;
+}
+istream& operator>>(istream &in, Int &i)
+{
+	in >> i.m_i;
+	return in;
+}
+
+void main()
+{
+	Int a = 1;
+	Int b = 2;
+	cout << "a=" << a << endl;
+	cout << "b=" << b << endl;
+	if (a == b)
+		cout << "a==b" << endl;
+	else
+		cout << "a!=b" << endl;
+
+}
+
+/*
+//重载为友元函数
+class Complex;
+Complex operator+(int real, const Complex &c);
+ostream& operator<<(ostream &out, const Complex &c);
+istream& operator>>(istream &in, Complex &c);
+//复数
+class Complex
+{
+	friend Complex operator+(int real, const Complex &c);
+	friend ostream& operator<<(ostream &out, const Complex &c);
+	friend istream& operator>>(istream &in, Complex &c);
+public:
+	Complex(int real = 0, int imag = 0) :m_real(real), m_imag(imag)
+	{
+		cout << "Create Complex obj:" << this << endl;
+	}
+	Complex(const Complex &c)
+	{
+		cout << "Copy Complex obj:" << this << endl;
+		m_real = c.m_real;
+		m_imag = c.m_imag;
+	}
+	Complex& operator=(const Complex &c)
+	{
+		cout << "Assign:" << this << endl;
+		if (this != &c)
+		{
+			m_real = c.m_real;
+			m_imag = c.m_imag;
+		}
+		return *this;
+	}
+	~Complex()
+	{
+		cout << "Free Complex obj:" << this << endl;
+	}
+public:
+	void PrintComplex()const
+	{
+		cout << "(" << m_real << "," << m_imag << ")" << endl;
+	}
+public:
+	//重载为成员方法
+	Complex operator+(const Complex &c)
+	{
+		return Complex(this->m_real + c.m_real, this->m_imag + c.m_imag);
+	}
+	Complex operator+(int real)
+	{
+		return Complex(m_real + real, m_imag);
+	}
+private:
+	int m_real;
+	int m_imag;
+};
+Complex operator+(int real, const Complex &c)
+{
+	return Complex(real + c.m_real, c.m_real);
+}
+ostream& operator<<(ostream &out, const Complex &c)
+{
+	out <<"("<< c.m_real << "," << c.m_imag<<")";
+	return out;
+}
+istream& operator>>(istream &in, Complex &c)
+{
+	in >> c.m_real >> c.m_imag;
+	return in;
+}
+int main()
+{
+	Complex c1(1,2);
+	Complex c2(3,4);
+	cout << c1 << endl;
+	Complex c;
+	cin >> c;
+	cout << c << endl;
+}
+/*
 class Date
 {
 public:
