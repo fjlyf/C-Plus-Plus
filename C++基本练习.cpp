@@ -140,7 +140,6 @@ void main()
 		cout << "a!=b" << endl;
 
 }
-
 /*
 //重载为友元函数
 class Complex;
