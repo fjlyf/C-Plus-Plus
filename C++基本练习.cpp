@@ -127,7 +127,6 @@ istream& operator>>(istream &in, Int &i)
 	in >> i.m_i;
 	return in;
 }
-
 void main()
 {
 	Int a = 1;
