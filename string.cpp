@@ -38,7 +38,6 @@ namespace fj
 		size_t _size;
 	};
 }
-
 void main()
 {
 	fj::string str("abc");
