@@ -3,6 +3,23 @@
 #include<string>
 using namespace std;
 
+namespace fj
+{
+	class string
+	{
+	public:
+
+	private:
+		friend ostream& operator<<(ostream& _cout, const fj::string& s);
+		friend istream& operator>>(istream& _cin, fj::string& s);
+	private:
+		char* _str;
+		size_t _capacity;
+		size_t _size;
+	};
+}
+
+/*
 void main()
 {
 	string str;
@@ -12,8 +29,25 @@ void main()
 	str += "hx";
 	cout << str << endl;
 	cout << str.c_str() << endl;
-	string file1("string.cpp");
-	size_t pos
+	string file("string.cpp");
+	size_t pos = file.rfind('.');
+	string suffix(file.substr(pos, file.size() - pos));
+	cout << suffix << endl;
+	string ur1("http://www.cplusplus.com/reference/string/find/");
+	cout << ur1 << endl;
+	size_t start = ur1.find("://");
+	if (start == string::npos)//npos是string里的一个静态变量（static const size_t npos=-1）
+	{
+		cout << "invalid ur1" << endl;
+		return;
+	}
+	start += 3;
+	size_t finish = ur1.find('/', start);
+	string address = ur1.substr(start, finish - start);
+	cout << address << endl;
+	pos = ur1.find("://");
+	ur1.erase(0, pos + 3);
+	cout << ur1 << endl;
 }
 
 /*
