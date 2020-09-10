@@ -2,6 +2,7 @@
 #include<iostream>
 #include<assert.h>
 using namespace std;
+
 //¸³ÖµÔËËã·ûÖØÔØ
 class Int;
 ostream& operator<<(ostream &out,const Int &i);
