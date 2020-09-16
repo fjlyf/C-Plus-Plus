@@ -3,7 +3,6 @@
 #include<string>
 using namespace std;
 
-
 namespace fj
 {
 	class string
