@@ -4,7 +4,6 @@
 #include<assert.h>
 using namespace std;
 
-
 namespace fj
 {
 	template<class T>
