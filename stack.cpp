@@ -8,6 +8,7 @@
 #include<assert.h>
 #include<functional>
 using namespace std;
+
 namespace fj
 {
 	template<class T,class Cont=vector<T>>
