@@ -4,6 +4,32 @@
 
 using namespace std;
 
+//¼Ì³Ð
+class Base
+{
+public:
+	void show()
+	{
+		cout<<"Base::Base.show()"<<endl;
+	}
+};
+class A:public Base
+{
+public:
+	void Print()
+	{
+		cout<<"A::A.Print()"<<endl;	
+	}
+};
+
+void main()
+{
+	A a;
+	a.show;
+	a.Print;
+}
+
+/*
 //¸³ÖµÔËËã·ûÖØÔØ
 class Int;
 ostream& operator<<(ostream &out,const Int &i);
