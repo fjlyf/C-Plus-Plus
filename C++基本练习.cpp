@@ -1,7 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
 #include<assert.h>
-
 using namespace std;
 
 //继承
@@ -10,24 +9,30 @@ class Base
 public:
 	void show()
 	{
-		cout<<"Base::Base.show()"<<endl;
+		cout << "Base::show()" << endl;
 	}
 };
-class A:public Base
+class A :public Base
 {
 public:
 	void Print()
 	{
-		cout<<"A::A.Print()"<<endl;	
+		cout << "A::Print()" << endl;
 	}
+private:
+	int m_a = 0;
 };
 
 void main()
 {
+	Base b;
 	A a;
-	a.show;
-	a.Print;
+	b = a;
+	a.show();
+	a.Print();
 }
+
+
 
 /*
 //赋值运算符重载
@@ -154,6 +159,7 @@ istream& operator>>(istream &in, Int &i)
 	in >> i.m_i;
 	return in;
 }
+
 void main()
 {
 	Int a = 1;
@@ -166,6 +172,7 @@ void main()
 		cout << "a!=b" << endl;
 
 }
+
 /*
 //重载为友元函数
 class Complex;
