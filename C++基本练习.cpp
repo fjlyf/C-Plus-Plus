@@ -32,8 +32,6 @@ void main()
 	a.Print();
 }
 
-
-
 /*
 //¸³ÖµÔËËã·ûÖØÔØ
 class Int;
