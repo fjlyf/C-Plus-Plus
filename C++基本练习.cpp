@@ -3,7 +3,65 @@
 #include<assert.h>
 using namespace std;
 
+
+/*
+class Student;
+ostream& operator<<(ostream &out, const Student &s);
+
+ostream& operator<<(ostream &out, const Student &s)
+{
+	out << "s._name" << "s._num " << endl;
+	return out;
+}
+
 //继承
+class Person
+{
+protected:
+	string _name="小李子";
+	int _num=111;
+};
+
+class Student : public Person
+{
+	friend ostream& operator << (ostream &out, const Student& s);
+public:
+	void Print()
+	{
+		cout << "姓名:" << _name << endl;
+		cout << "身份证号:" << Person::_num << endl;
+		cout << "学号:" << _num << endl;
+	}
+protected:
+	int _num=999;
+};
+
+
+void main()
+{
+	Student s1;
+	s1.Print();
+}
+/*
+void main()
+{
+	Student sobj;
+	Person *pp = &sobj;
+	Person &rp = sobj;
+	Person pobj = sobj;
+	//sobj = pobj; 基类对象不能赋值给子类对象（原因为基类对象中没有子类的呢一部分，类型不相等不能赋值）
+	pp = &sobj;
+	Student *ps1 = (Student*)pp;//基类对象可以通过强制转换赋值给派生类的指针
+	ps1->_No = 10;
+
+	//代码可以实现，但是会造成越界访问。
+	//pp = &pobj;
+	//Student *ps2 = (Student*)pp;
+	//ps2->_No = 10;
+
+
+}
+/*
 class Base
 {
 public:
@@ -31,6 +89,8 @@ void main()
 	a.show();
 	a.Print();
 }
+
+
 
 /*
 //赋值运算符重载
