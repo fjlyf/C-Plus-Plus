@@ -7,8 +7,6 @@ namespace fj
 {
 	class string
 	{
-	public:
-
 	private:
 		friend ostream& operator<<(ostream& _cout, const fj::string& s);
 		friend istream& operator>>(istream& _cin, fj::string& s);
