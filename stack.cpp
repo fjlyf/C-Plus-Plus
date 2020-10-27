@@ -7,7 +7,6 @@
 #include<list>
 #include<assert.h>
 #include<functional>
-
 using namespace std;
 
 namespace fj
