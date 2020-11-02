@@ -13,7 +13,6 @@ void main()
 {
 	deque<int> dq;
 }
-
 /*
 class Date
 {
