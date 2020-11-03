@@ -3,7 +3,6 @@
 #include<vector>
 using namespace std;
 
-
 void OutOfMemory()
 {
 	cout<<"Out Of Memory."<<endl; //delete 
