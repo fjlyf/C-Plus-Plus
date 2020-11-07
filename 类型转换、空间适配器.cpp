@@ -1,7 +1,6 @@
 #include<iostream>
 #include<assert.h>
 #include<vector>
-
 using namespace std;
 
 void OutOfMemory()
